@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 
-public class ServerLoadBalancerTest {
+public class ServerLoadBalancerTest extends ServerLoadBalancerBaseTest {
 	@Test
 	public void itCompiles() {
 		assertThat(true, equalTo(true));
@@ -79,23 +79,6 @@ public class ServerLoadBalancerTest {
 		assertThat("the less loaded server should not contain vm", !theServer.contains(theVm));
 	}
 
-	private void balance(Server[] servers, Vm[] vms) {
-		new ServerLoadBalancer().balance(servers, vms);
-	}
-
-	private Vm[] aListOfVmsWith(Vm... vms) {
-		return vms;
-	}
-
-	private Vm[] anEmptyListOfVms() {
-		return new Vm[0];
-	}
-
-	private Server[] aListOfServersWith(Server... servers) {
-		return servers;
-	}
-
-	private <T> T a(Builder<T> builder) {
-		return builder.build();
-	}
+	
+	
 }
