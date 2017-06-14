@@ -4,6 +4,7 @@ package edu.iis.mto.serverloadbalancer;
 import static edu.iis.mto.serverloadbalancer.Builder.A;
 import static edu.iis.mto.serverloadbalancer.ServerAssert.assertThat;
 import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
+import static edu.iis.mto.serverloadbalancer.VirtualMachineBuilder.VM;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.hamcrest.MatcherAssert;
@@ -34,5 +35,12 @@ public class ServerLoadBalancerTest {
 		new ServerBalancer().balance(servers, virtualMachines);
 	}
 
+	@Test
+	public void testServerWithOneMachineTakingFullCapacity() throws Exception {
+		Server server = A(server().withCapacity(1));
+		VirtualMachine vm = A(VM().withSize(1));
+		balance(Collections.singleton(server), Collections.singletonList(vm));
 
+		assertThat(server).hasExactLoadPercentage(100);
+	}
 }
