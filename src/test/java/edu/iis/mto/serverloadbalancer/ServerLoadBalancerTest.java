@@ -1,15 +1,37 @@
 package edu.iis.mto.serverloadbalancer;
 
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static edu.iis.mto.serverloadbalancer.Builder.A;
+import static edu.iis.mto.serverloadbalancer.ServerAssert.assertThat;
+import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
 import static org.hamcrest.Matchers.equalTo;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class ServerLoadBalancerTest {
 	@Test
 	public void itCompiles() {
-		assertThat(true, equalTo(true));
+		MatcherAssert.assertThat(true, equalTo(true));
+	}
+
+	@Test
+	public void testEmptyServerStaysEmpty() {
+		Server server = A(server().withCapacity(0));
+
+		//noinspection unchecked
+		balance(Collections.singletonList(server), Collections.EMPTY_LIST);
+
+		assertThat(server).hasExactLoadPercentage(0);
+	}
+
+	private void balance(Collection<Server> servers, Collection<VirtualMachine> virtualMachines) {
+		new ServerBalancer().balance(servers, virtualMachines);
 	}
 
 
