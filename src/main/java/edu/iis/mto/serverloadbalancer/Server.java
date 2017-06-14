@@ -30,6 +30,6 @@ public class Server {
     }
 
     public boolean contains(VirtualMachine vm) {
-        return false;
+        return virtualMachines.contains(vm);
     }
 }
