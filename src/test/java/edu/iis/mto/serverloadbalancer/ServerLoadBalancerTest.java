@@ -1,6 +1,7 @@
 package edu.iis.mto.serverloadbalancer;
 
 
+import org.assertj.core.api.Assertions;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
@@ -77,5 +78,13 @@ public class ServerLoadBalancerTest {
 
 		assertThat(lessLoaded).contains(vm).hasLoadPercentage(30);
 		assertThat(moreLoaded).hasExactLoadPercentage(50);
+	}
+
+	@Test(expected = NoServerWithEnoughSpace.class)
+	public void testExceptionWhenNotEnoughSpace() throws Exception {
+		Server server = A(server().withCapacity(10));
+		VirtualMachine vm1 = A(VM().withSize(11));
+
+		balance(Collections.singleton(server), Collections.singleton(vm1));
 	}
 }
