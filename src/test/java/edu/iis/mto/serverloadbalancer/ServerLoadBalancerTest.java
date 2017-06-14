@@ -43,4 +43,14 @@ public class ServerLoadBalancerTest {
 
 		assertThat(server).hasExactLoadPercentage(100);
 	}
+
+	@Test
+	public void testOneMachineTakes10PercentageOfSpace() throws Exception {
+		Server server = A(server().withCapacity(10));
+		VirtualMachine vm = A(VM().withSize(1));
+
+		balance(Collections.singleton(server), Collections.singletonList(vm));
+
+		assertThat(server).hasExactLoadPercentage(10);
+	}
 }
