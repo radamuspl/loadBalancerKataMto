@@ -1,20 +1,18 @@
 package edu.iis.mto.serverloadbalancer;
 
 
-import static edu.iis.mto.serverloadbalancer.Builder.A;
-import static edu.iis.mto.serverloadbalancer.ServerAssert.assertThat;
-import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
-import static edu.iis.mto.serverloadbalancer.VirtualMachineBuilder.VM;
-import static org.hamcrest.Matchers.equalTo;
-
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+
+import static edu.iis.mto.serverloadbalancer.Builder.A;
+import static edu.iis.mto.serverloadbalancer.ServerAssert.assertThat;
+import static edu.iis.mto.serverloadbalancer.ServerBuilder.server;
+import static edu.iis.mto.serverloadbalancer.VirtualMachineBuilder.VM;
+import static org.hamcrest.Matchers.equalTo;
 
 public class ServerLoadBalancerTest {
 	@Test

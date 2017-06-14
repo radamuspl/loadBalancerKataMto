@@ -22,14 +22,18 @@ public class Server {
 
     public void addMachine(VirtualMachine vm) {
         virtualMachines.add(vm);
-        usedSpace += vm.getSize();
+        usedSpace = calculateUsedSpaceWith(vm);
     }
 
     public boolean canAddVm(VirtualMachine virtualMachine) {
-        return (!virtualMachines.contains(virtualMachine)) && (usedSpace + virtualMachine.getSize() <= capacity);
+        return (!contains(virtualMachine)) && (calculateUsedSpaceWith(virtualMachine) <= capacity);
     }
 
     public boolean contains(VirtualMachine vm) {
         return virtualMachines.contains(vm);
+    }
+
+    private double calculateUsedSpaceWith(VirtualMachine virtualMachine) {
+        return usedSpace + virtualMachine.getSize();
     }
 }
