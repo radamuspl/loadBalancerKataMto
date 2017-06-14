@@ -11,6 +11,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -52,5 +53,19 @@ public class ServerLoadBalancerTest {
 		balance(Collections.singleton(server), Collections.singletonList(vm));
 
 		assertThat(server).hasExactLoadPercentage(10);
+	}
+
+	@Test
+	public void testServerContainsAllAddedVms() throws Exception {
+		Server server = A(server().withCapacity(10));
+		VirtualMachine vm1 = A(VM().withSize(1));
+		VirtualMachine vm2 = A(VM().withSize(1));
+
+		balance(Collections.singleton(server), Arrays.asList(vm1, vm2));
+
+		assertThat(server).hasExactLoadPercentage(20)
+				.contains(vm1)
+				.contains(vm2);
+
 	}
 }

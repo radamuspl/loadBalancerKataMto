@@ -28,4 +28,8 @@ public class Server {
     public boolean canAddVm(VirtualMachine virtualMachine) {
         return (!virtualMachines.contains(virtualMachine)) && (usedSpace + virtualMachine.getSize() <= capacity);
     }
+
+    public boolean contains(VirtualMachine vm) {
+        return false;
+    }
 }
