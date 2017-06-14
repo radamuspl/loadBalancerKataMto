@@ -4,13 +4,18 @@ import java.util.Collection;
 
 public class ServerBalancer {
     public void balance(Collection<Server> servers, Collection<VirtualMachine> virtualMachines) {
-        for(VirtualMachine vm : virtualMachines) {
-            for(Server server : servers) {
-                if(server.getCapacity() <= vm.getSize()) {
-                    server.addMachine(vm);
-                    break;
-                }
-            }
-        }
+        virtualMachines.forEach(virtualMachine -> pickServerAndAddVm(virtualMachine, servers));
+    }
+
+    private void pickServerAndAddVm(VirtualMachine vm, Collection<Server> servers) {
+        //noinspection ConstantConditions
+        pickServerForVm(vm, servers).addMachine(vm);
+    }
+
+    private Server pickServerForVm(VirtualMachine vm, Collection<Server> servers) {
+        return servers.stream()
+                .filter(server -> server.canAddVm(vm))
+                .findFirst()
+                .orElse(null);
     }
 }

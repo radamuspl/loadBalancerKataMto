@@ -24,4 +24,8 @@ public class Server {
         virtualMachines.add(vm);
         usedSpace += vm.getSize();
     }
+
+    public boolean canAddVm(VirtualMachine virtualMachine) {
+        return (!virtualMachines.contains(virtualMachine)) && (usedSpace + virtualMachine.getSize() <= capacity);
+    }
 }
