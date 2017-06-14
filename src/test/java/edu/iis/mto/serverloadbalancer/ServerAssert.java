@@ -14,7 +14,7 @@ public class ServerAssert extends AbstractAssert<ServerAssert, Server> {
     }
 
     public ServerAssert hasExactLoadPercentage(double expectedLoad) {
-        Assertions.assertThat(expectedLoad)
+        Assertions.assertThat(actual.getLoad())
                 .overridingErrorMessage("Expected load <%f> to be <%f> but was not", expectedLoad, actual.getLoad())
                 .isEqualTo(expectedLoad);
         return this;
