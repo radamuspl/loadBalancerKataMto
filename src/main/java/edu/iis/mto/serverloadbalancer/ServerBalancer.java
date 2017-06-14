@@ -33,6 +33,6 @@ public class ServerBalancer {
                 .filter(server -> server.canAddVm(vm))
                 .sorted(LOAD_COMPARATOR)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(NoServerWithEnoughSpace::new);
     }
 }
