@@ -23,7 +23,7 @@ public class ServerLoadBalancerTest {
 
 	@Test
 	public void testEmptyServerStaysEmpty() {
-		Server server = A(server().withCapacity(0));
+		Server server = A(server().withCapacity(1));
 
 		//noinspection unchecked
 		balance(Collections.singletonList(server), Collections.EMPTY_LIST);

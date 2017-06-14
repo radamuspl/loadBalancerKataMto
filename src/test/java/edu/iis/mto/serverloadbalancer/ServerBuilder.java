@@ -14,7 +14,7 @@ public class ServerBuilder implements Builder<Server> {
         return server;
     }
 
-    public ServerBuilder withCapacity(int capacity) {
+    public ServerBuilder withCapacity(double capacity) {
         server.setCapacity(capacity);
         return this;
     }
