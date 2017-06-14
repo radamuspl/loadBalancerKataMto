@@ -8,6 +8,10 @@ public class Server {
     private double usedSpace = 0;
     private final List<VirtualMachine> virtualMachines = new ArrayList<>();
 
+    public Server(double capacity) {
+        this.capacity = capacity;
+    }
+
     public void setCapacity(double capacity) {
         this.capacity = capacity;
     }

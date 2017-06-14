@@ -66,4 +66,16 @@ public class ServerLoadBalancerTest {
 				.contains(vm2);
 
 	}
+
+	@Test
+	public void testBalancesMachinesToLessLoadedServer() throws Exception {
+		Server lessLoaded = A(server().withCapacity(10).withInitialLoad(20));
+		Server moreLoaded = A(server().withCapacity(15).withInitialLoad(50));
+		VirtualMachine vm = A(VM().withSize(1));
+
+		balance(Arrays.asList(moreLoaded, lessLoaded), Collections.singletonList(vm));
+
+		assertThat(lessLoaded).contains(vm).hasLoadPercentage(30);
+		assertThat(moreLoaded).hasExactLoadPercentage(50);
+	}
 }
