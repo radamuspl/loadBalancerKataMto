@@ -1,9 +1,13 @@
 package edu.iis.mto.serverloadbalancer;
 
 import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.api.AbstractDoubleAssert;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
 
 public class ServerAssert extends AbstractAssert<ServerAssert, Server> {
+
+    private static final double LOAD_PERCENTAGE_DELTA = 0.1;
 
     public static ServerAssert assertThat(Server server) {
         return new ServerAssert(server);
@@ -14,16 +18,20 @@ public class ServerAssert extends AbstractAssert<ServerAssert, Server> {
     }
 
     public ServerAssert hasExactLoadPercentage(double expectedLoad) {
-        Assertions.assertThat(actual.getLoad())
-                .overridingErrorMessage("Expected load <%f> to be <%f> but was not", expectedLoad, actual.getLoad())
-                .isEqualTo(expectedLoad);
-        return this;
+        return hasLoadPercentage(expectedLoad, 0.0);
     }
 
     public ServerAssert hasLoadPercentage(double expectedLoad) {
-        Assertions.assertThat(actual.getLoad())
-                .overridingErrorMessage("Expected load <%f> to be <%f> but was not", expectedLoad, actual.getLoad())
-                .isEqualTo(expectedLoad);
+        return hasLoadPercentage(expectedLoad, LOAD_PERCENTAGE_DELTA);
+    }
+
+    public ServerAssert hasLoadPercentage(double expectedLoad, double delta) {
+        load(expectedLoad).isCloseTo(expectedLoad, Offset.offset(delta));
         return this;
+    }
+
+    private AbstractDoubleAssert<?> load(double expected) {
+        return Assertions.assertThat(actual.getLoad())
+                .overridingErrorMessage("Expected load <%f> to be <%f> but was not", expected, actual.getLoad());
     }
 }
