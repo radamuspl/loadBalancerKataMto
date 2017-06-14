@@ -12,14 +12,6 @@ public class Server {
         this.capacity = capacity;
     }
 
-    public void setCapacity(double capacity) {
-        this.capacity = capacity;
-    }
-
-    public double getCapacity() {
-        return capacity;
-    }
-
     public double getLoad() {
         return (usedSpace / capacity) * 100;
     }

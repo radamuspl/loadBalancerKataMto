@@ -5,8 +5,6 @@ import org.assertj.core.api.AbstractDoubleAssert;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
 
-import java.util.Objects;
-
 public class ServerAssert extends AbstractAssert<ServerAssert, Server> {
 
     private static final double LOAD_PERCENTAGE_DELTA = 0.1;
