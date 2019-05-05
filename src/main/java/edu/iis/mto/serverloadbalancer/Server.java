@@ -24,7 +24,7 @@ public class Server {
 				* MAXIMUM_LOAD;
 	}
 
-	public int vmsCount() {		
+	public int vmsCount() {
 		return vms.size();
 	}
 
